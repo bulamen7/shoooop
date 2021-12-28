@@ -1,4 +1,4 @@
-package com.bulamen7.demo;
+package com.bulamen7.shop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,5 +8,9 @@ public class ShopStoreApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ShopStoreApplication.class, args);
+
     }
 }
+//produkty dodawanie usuwanie
+//znajdz pojedynczo, wszystkie
+//koszyk
