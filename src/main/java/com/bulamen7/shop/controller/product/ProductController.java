@@ -5,7 +5,12 @@ import com.bulamen7.shop.model.product.ProductDto;
 import com.bulamen7.shop.model.product.UpdateProductForm;
 import com.bulamen7.shop.service.product.ProductService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +22,22 @@ import java.util.List;
 @RequestMapping("/products")
 class ProductController {
     private final ProductService productService;
+    private final NewProductFormValidator validator;
 
-    ProductController(ProductService productService) {
+    ProductController(ProductService productService, NewProductFormValidator validator) {
         this.productService = productService;
+        this.validator = validator;
+    }
+
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.setValidator(validator);
     }
 
     @GetMapping
     ModelAndView homePage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("product/index");
-        modelAndView.addObject("newProduct", new NewProductForm());
         List<ProductDto> products = productService.findAll();
         modelAndView.addObject("productsList", products);
         return modelAndView;
@@ -35,7 +46,6 @@ class ProductController {
     @GetMapping("/{id}")
     ModelAndView findProduct(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView();
-
         ProductDto product = productService.findById(id);
         modelAndView.setViewName("product/product");
         modelAndView.addObject("product", product);
@@ -43,10 +53,11 @@ class ProductController {
         return modelAndView;
     }
 
-    @PostMapping
-    String addProduct(NewProductForm product) {
-        productService.addProduct(product);
-        return "redirect:/products";
+    @GetMapping("/add")
+    ModelAndView addProductPage() {
+        ModelAndView modelAndView = new ModelAndView("product/addProduct");
+        modelAndView.addObject("newProduct", new NewProductForm());
+        return modelAndView;
     }
 
     @GetMapping("/{id}/delete")
@@ -55,9 +66,17 @@ class ProductController {
         return "redirect:/products";
     }
 
+    @PostMapping("/add")
+    ModelAndView addProduct(@ModelAttribute @Validated NewProductForm newProduct, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("product/addProduct");
+        }
+        productService.addProduct(newProduct);
+        return new ModelAndView("redirect:/products");
+    }
+
     @PostMapping("/{id}/patch")
     String patchProduct(@PathVariable Long id, UpdateProductForm updateProductForm) {
-        System.out.println("jestem tu: " + updateProductForm);
         productService.patchUpdate(id, updateProductForm);
         return "redirect:/products";
     }
