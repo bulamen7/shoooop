@@ -67,7 +67,7 @@ class ProductController {
     }
 
     @PostMapping("/add")
-    ModelAndView addProduct(@ModelAttribute @Validated NewProductForm newProduct, BindingResult bindingResult) {
+    ModelAndView addProduct(@ModelAttribute("newProduct") @Validated NewProductForm newProduct, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("product/addProduct");
         }

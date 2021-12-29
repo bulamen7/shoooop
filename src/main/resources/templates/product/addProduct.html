@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
@@ -7,8 +7,11 @@
     <body>
         <form th:object="${newProduct}" method="post" th:action="@{/products/add}">
             <input th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             <input th:field="*{price}">
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
             <input th:field="*{description}">
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             <button th:type="submit">Dodaj</button>
         </form>
     </body>
