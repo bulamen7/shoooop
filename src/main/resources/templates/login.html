@@ -3,20 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>login</title>
+        <link rel="stylesheet" type="text/css" th:href="@{~/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
     </head>
     <body>
-        <h2>Zaloguj się</h2><br>
-        <label><b>Nazwa uzytkownika</b></label>
-        <input type="text" placeholder="Username">
-        <br>
-        <label><b>Password</b></label>
-        <input type="Password" placeholder="Password">
-        <br>
-        <input type="button" value="Zaloguj">
-        <br>
-        <input type="checkbox" id="check">
-        <span>Pamiętaj</span>
-        <br> Przypomnij <a href="#">haslo</a>
+
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                  <form>
+                      <label for="login">login:</label>
+                      <input id="login" type="text">
+                      <br>
+                      <label for="password"> password: </label>
+                      <input id="password" type="password">
+                      <br>
+                      <button type="submit">submit</button>
+                  </form>
+                </div>
+            </div>
         </div>
+
+        <script>th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"></script>
+        <script th:src="@{~/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
     </body>
 </html>

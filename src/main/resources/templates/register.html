@@ -1,35 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>register</title>
     </head>
     <body>
-        <form>
-            <table>
-                <tr>
-                    <td>
-                        Login :
-                    </td>
-                    <td>
-                        <input type=”Login” placeholder=login>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td>
-                        <input type=”Password” placeholder=haslo>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Password :
-                    </td>
-                    <td>
-                        <input type=”Password” placeholder=haslo>
-                    </td>
-                </tr>
-            </table>
+        <form th:object="${registerForm}" method="post" th:action="@{/register}">
+            <input th:field="*{login}" type=”Login”>
+            <input th:field="*{password}" type=”Password”>
             <button th:type="submit">Utworz konto</button>
         </form>
     </body>
