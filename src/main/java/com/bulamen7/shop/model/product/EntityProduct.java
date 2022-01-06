@@ -57,4 +57,5 @@ public class EntityProduct {
     public LocalDateTime getCreateDateTime() {
         return createDateTime;
     }
+
 }

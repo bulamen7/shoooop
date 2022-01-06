@@ -1,6 +1,7 @@
 package com.bulamen7.shop.controller.product;
 
 import com.bulamen7.shop.model.product.NewProductForm;
+import com.bulamen7.shop.model.product.UpdateProductForm;
 import com.bulamen7.shop.service.product.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +43,14 @@ class ProductControllerIT {
                 .andExpect(view()
                         .name("product/index"))
                 .andExpect(model()
-                        .attributeExists("newProduct", "productsList"));
+                        .attributeExists("productsList"));
         //then
     }
 
     @Test
     void shouldAddProduct() throws Exception {
         //when
-        ResultActions result = mockMvc.perform(post("/products")
+        ResultActions result = mockMvc.perform(post("/products/add")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "test")
                 .param("price", "15")
@@ -63,6 +64,17 @@ class ProductControllerIT {
     }
 
     @Test
+    void shouldGetProductPage() throws Exception {
+        mockMvc.perform(get("/products/add"))
+                .andExpect(status()
+                        .is(200))
+                .andExpect(view()
+                        .name("product/addProduct"))
+                .andExpect(model()
+                        .attributeExists("newProduct"));
+    }
+
+    @Test
     void shouldDeleteProduct() throws Exception {
         //when
         mockMvc.perform(get("/products/5/delete"));
@@ -70,7 +82,47 @@ class ProductControllerIT {
         //then
         verify(productService).deleteById(5L);
     }
+
+    @Test
+    void shouldPatchProduct() throws Exception {
+        mockMvc.perform(post("/products/2/patch")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("name", "Arek")
+                        .param("price", "10")
+                        .param("description", "opis"))
+                .andExpect(status()
+                        .is(302))
+                .andExpect(view()
+                        .name("redirect:/products"));
+        verify(productService).patchUpdate(2L, new UpdateProductForm("Arek", BigDecimal.valueOf(10), "opis"));
+
+    }
+
+    @Test
+    void shouldPutProduct() throws Exception {
+        mockMvc.perform(post("/products/2/put")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("name", "Arek")
+                        .param("price", "10")
+                        .param("description", "opis"))
+                .andExpect(status()
+                        .is(302))
+                .andExpect(view()
+                        .name("redirect:/products"));
+
+        verify(productService).putUpdate(2L, new UpdateProductForm("Arek", BigDecimal.valueOf(10), "opis"));
+    }
+
+    @Test
+    void shouldAddProductView() throws Exception {
+        mockMvc.perform(get("/products/add"))
+                .andExpect(status()
+                        .is(200))
+                .andExpect(view()
+                        .name("product/addProduct"));
+    }
 }
+
 
 
 

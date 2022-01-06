@@ -8,9 +8,10 @@
         <tbody>
             <h1>Lista przedmiotow: </h1>
             <p th:each="product: ${productsList}">
-            <td th:text="'name: ' + ${product.name}"></td>
-            <td th:text="'price: ' + ${product.price} + ' zł'"></td>
-            <td th:text="'description: ' + ${product.description}"></td>
+            <td th:text="'id:' + ${product.id} + ' '"</td>
+            <td th:text="'name:' + ${product.name} + ' '"></td>
+            <td th:text="'price:' + ${product.price} + ' zł'"></td>
+            <td th:text="'description:' + ${product.description} + ' '"></td>
             </p>
         </tbody>
     </body>

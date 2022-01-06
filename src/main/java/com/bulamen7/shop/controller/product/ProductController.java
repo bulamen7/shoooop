@@ -29,7 +29,7 @@ class ProductController {
         this.validator = validator;
     }
 
-    @InitBinder
+    @InitBinder(value = "newProduct")
     public void init(WebDataBinder binder) {
         binder.setValidator(validator);
     }

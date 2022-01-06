@@ -38,9 +38,6 @@ public class Cart {
     }
 }
 
-//TODO serwis do tworzenia uzytykownikow
 //TODO serwis do tworzenia zamowien
 //TODO bootstrap 4
-//TODO formularz logowania
-//TODO formularz rejestracji
 
