@@ -17,7 +17,7 @@ public class EntityProduct {
     private String description;
     private LocalDateTime createDateTime = LocalDateTime.now();
 
-    private EntityProduct() {
+    public EntityProduct() {
     }
 
     public EntityProduct(String name, BigDecimal price, String description) {
@@ -57,4 +57,5 @@ public class EntityProduct {
     public LocalDateTime getCreateDateTime() {
         return createDateTime;
     }
+
 }

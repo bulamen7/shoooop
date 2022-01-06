@@ -38,11 +38,15 @@ public class ProductService {
     }
 
     public void deleteById(Long id) {
-        productRepository.deleteById(id);
+        productRepository
+                .deleteById(id);
     }
 
     public void patchUpdate(Long id, UpdateProductForm updateProductForm) {
-        EntityProduct entityProduct = productRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        EntityProduct entityProduct = productRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Product cant be update"));
+
         if (updateProductForm.getPrice() != null) {
             entityProduct.setPrice(updateProductForm.getPrice());
         }
@@ -55,7 +59,9 @@ public class ProductService {
     }
 
     public void putUpdate(Long id, UpdateProductForm updateProductForm) {
-        EntityProduct entityProduct = productRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        EntityProduct entityProduct = productRepository
+                .findById(id).
+                orElseThrow(() -> new RuntimeException("Product cant be update"));
         entityProduct.setPrice(updateProductForm.getPrice());
         entityProduct.setName(updateProductForm.getName());
         entityProduct.setDescription(updateProductForm.getDescription());

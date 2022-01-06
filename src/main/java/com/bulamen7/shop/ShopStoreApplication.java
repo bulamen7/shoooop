@@ -11,6 +11,4 @@ public class ShopStoreApplication {
 
     }
 }
-//produkty dodawanie usuwanie
-//znajdz pojedynczo, wszystkie
-//koszyk
+
