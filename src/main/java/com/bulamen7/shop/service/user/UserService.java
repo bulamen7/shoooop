@@ -3,6 +3,7 @@ package com.bulamen7.shop.service.user;
 import com.bulamen7.shop.model.user.RegistrationForm;
 import com.bulamen7.shop.repository.user.User;
 import com.bulamen7.shop.repository.user.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,16 +11,18 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void saveUser(RegistrationForm newUserForm) {
         if (userRepository.existsByLogin(newUserForm.getLogin())) {
             throw new IllegalStateException("Duplicated User");
         }
-        userRepository.save(new User(newUserForm.getName(), newUserForm.getLogin(), newUserForm.getEmail(), newUserForm.getPassword()));
+        userRepository.save(new User(newUserForm.getName(), newUserForm.getLogin(), passwordEncoder.encode(newUserForm.getPassword()), newUserForm.getEmail()));
     }
 
     public User findById(Long id) {
@@ -34,3 +37,4 @@ public class UserService {
         userRepository.deleteById(id);
     }
 }
+//TODO walidator dla hasla, dodac pola, testy dla rejestracji,

@@ -6,9 +6,10 @@
     </head>
     <body>
         <form th:object="${registerForm}" method="post" th:action="@{/register/add}">
-            <input th:field="*{login}" type=”Login”>
-            <input th:field="*{password}" type=”Password”>
+            <input th:field="*{login}">
+            <input th:field="*{password}">
             <button th:type="submit">Utworz konto</button>
         </form>
     </body>
 </html>
+
