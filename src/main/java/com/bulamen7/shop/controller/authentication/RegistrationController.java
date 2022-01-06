@@ -25,7 +25,7 @@ public class RegistrationController {
         return modelAndView;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     String registerUser(@ModelAttribute("registerForm") RegistrationForm registerForm) {
         System.out.println(registerForm);
         userService.saveUser(registerForm);
