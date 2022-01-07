@@ -21,7 +21,6 @@ public class CartController {
 
     @GetMapping
     ModelAndView cartPage() {
-
         ModelAndView modelAndView = new ModelAndView("cart/index");
         List<ProductDto> products = cart.findAllProducts();
         modelAndView.addObject("products", products);

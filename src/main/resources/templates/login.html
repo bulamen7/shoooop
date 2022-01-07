@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>login</title>
         <link rel="stylesheet" type="text/css" th:href="@{~/webjars/bootstrap/4.6.0/css/bootstrap.min.css}"/>
     </head>
     <body>
-
         <div class="container">
             <div class="row">
                 <div class="span12">
                   <form th:object="${form}" method="post" th:action="@{/login}">
-                      <label for="login">login:</label>
+                      <label for="login">login: </label>
                       <input th:field="*{login}"  type="text">
                       <br>
                       <label for="password"> password: </label>
@@ -23,7 +22,7 @@
             </div>
         </div>
 
-        <script>th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"></script>
+        <script>th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"> </script>
         <script th:src="@{~/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
     </body>
 </html>

@@ -111,6 +111,7 @@ class ProductControllerIT {
                         .name("redirect:/products"));
 
         verify(productService).putUpdate(2L, new UpdateProductForm("Arek", BigDecimal.valueOf(10), "opis"));
+
     }
 
     @Test
