@@ -38,6 +38,3 @@ public class Cart {
     }
 }
 
-//TODO serwis do tworzenia zamowien
-//TODO bootstrap 4
-

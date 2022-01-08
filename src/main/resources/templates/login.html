@@ -9,20 +9,20 @@
         <div class="container">
             <div class="row">
                 <div class="span12">
-                  <form th:object="${form}" method="post" th:action="@{/login}">
-                      <label for="login">login: </label>
-                      <input th:field="*{login}"  type="text">
-                      <br>
-                      <label for="password"> password: </label>
-                      <input th:field="*{password}" type="password">
-                      <br>
-                      <button type="submit">submit</button>
-                  </form>
+                    <form th:object="${form}" method="post" th:action="@{/login}">
+                        login:
+                        <input th:field="*{login}" type="text">
+                        <br>
+                        password:
+                        <input th:field="*{password}" type="password">
+                        <br>
+                        <button type="submit">submit</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <script>th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"> </script>
+        <script th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"></script>
         <script th:src="@{~/webjars/bootstrap/4.6.0/js/bootstrap.bundle.min.js}"></script>
     </body>
 </html>

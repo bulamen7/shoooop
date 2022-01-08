@@ -1,21 +1,24 @@
 package com.bulamen7.shop.model.user;
 
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 public class RegistrationForm {
     private String name;
-    private String email;
     private String login;
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private String password;
+    private String email;
+    private String repeatedPassword;
 
     public RegistrationForm() {
     }
 
-    public RegistrationForm(String name, String email, String login, String password) {
+    public RegistrationForm(String name, String login, String password, String email) {
         this.name = name;
-        this.email = email;
         this.login = login;
         this.password = password;
+        this.email = email;
     }
 
     public String getName() {
@@ -50,6 +53,17 @@ public class RegistrationForm {
         this.password = password;
     }
 
+    public String getRepeatedPassword() {
+        return repeatedPassword;
+    }
+
+    public void setRepeatedPassword(String repeatedPassword) {
+        if (password.equals(repeatedPassword)) {
+            this.repeatedPassword = repeatedPassword;
+        }
+        throw new IllegalArgumentException("Password isnt same");
+    }
+
     @Override
     public String toString() {
         return "NewUserForm{" +
@@ -65,11 +79,11 @@ public class RegistrationForm {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RegistrationForm that = (RegistrationForm) o;
-        return Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(login, that.login) && Objects.equals(password, that.password);
+        return Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(login, that.login) && Objects.equals(password, that.password) && Objects.equals(repeatedPassword, that.repeatedPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, login, password);
+        return Objects.hash(name, email, login, password, repeatedPassword);
     }
 }

@@ -37,4 +37,4 @@ public class UserService {
         userRepository.deleteById(id);
     }
 }
-//TODO walidator dla hasla, dodac pola, testy dla rejestracji,
+//TODO walidator dla hasla, dodac pola,
