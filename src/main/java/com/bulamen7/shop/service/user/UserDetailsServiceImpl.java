@@ -23,11 +23,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userRepository
                 .findByLogin(login)
-                .map(u -> new User(u.getLogin(), u.getPassword(), getAuthorities()))
+                .map(u -> new User(u.getLogin(), u.getPassword(), login.equals("admin") ? getAdminRole() : getAuthorities()))
                 .orElseThrow(() -> new UsernameNotFoundException(login));
     }
 
     private List<GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    private List<GrantedAuthority> getAdminRole() {
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 }

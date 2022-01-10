@@ -22,12 +22,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/products")
                 .authenticated()
+                .antMatchers("/admin")
+                .hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")

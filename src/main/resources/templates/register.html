@@ -7,7 +7,11 @@
     <body>
         <form th:object="${registerForm}" method="post" th:action="@{/register/add}">
             <input th:field="*{login}">
+            <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
             <input th:field="*{password}">
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            <input th:field="*{repeatedPassword}">
+            <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></div>
             <button th:type="submit">Utworz konto</button>
         </form>
         <script th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"></script>

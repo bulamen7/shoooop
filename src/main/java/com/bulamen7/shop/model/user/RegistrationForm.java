@@ -1,12 +1,11 @@
 package com.bulamen7.shop.model.user;
 
-import javax.validation.constraints.Pattern;
+
 import java.util.Objects;
 
 public class RegistrationForm {
     private String name;
     private String login;
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private String password;
     private String email;
     private String repeatedPassword;
@@ -14,12 +13,14 @@ public class RegistrationForm {
     public RegistrationForm() {
     }
 
-    public RegistrationForm(String name, String login, String password, String email) {
+    public RegistrationForm(String name, String login, String password, String email, String repeatedPassword) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.repeatedPassword = repeatedPassword;
     }
+
 
     public String getName() {
         return name;
@@ -58,11 +59,9 @@ public class RegistrationForm {
     }
 
     public void setRepeatedPassword(String repeatedPassword) {
-        if (password.equals(repeatedPassword)) {
-            this.repeatedPassword = repeatedPassword;
-        }
-        throw new IllegalArgumentException("Password isnt same");
+        this.repeatedPassword = repeatedPassword;
     }
+
 
     @Override
     public String toString() {

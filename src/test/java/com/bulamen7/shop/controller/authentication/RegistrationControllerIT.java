@@ -49,6 +49,6 @@ class RegistrationControllerIT {
                         .is(302))
                 .andExpect(view()
                         .name("redirect:/login"));
-        verify(userService).saveUser(new RegistrationForm("Arek", "randomMail@wp.pl", "log", "pass"));
+        verify(userService).saveUser(new RegistrationForm("Arek", "randomMail@wp.pl", "log", "pass", "pass"));
     }
 }

@@ -23,7 +23,7 @@ class UserServiceTest {
 
     @Test
     void shouldSaveUser() {
-        RegistrationForm registrationForm = new RegistrationForm("Marek", "login", "pass", "wp@wp.pl");
+        RegistrationForm registrationForm = new RegistrationForm("Marek", "login", "pass", "wp@wp.pl", "pass");
         userService.saveUser(registrationForm);
         verify(userRepository).save(any());
     }

@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="span12">
                     <form th:object="${form}" method="post" th:action="@{/login}">
-                        login:
+                        [[#{form.login.loginField}]]
                         <input th:field="*{login}" type="text">
                         <br>
-                        password:
+                        [[#{form.login.passwordField}]]
                         <input th:field="*{password}" type="password">
                         <br>
                         <button type="submit">submit</button>
