@@ -20,7 +20,6 @@ public class Cart {
         this.productService = productService;
     }
 
-
     public void addProduct(Long id) {
         ProductDto byId = productService.findById(id);
         products.add(byId);
