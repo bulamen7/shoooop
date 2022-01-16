@@ -1,7 +1,7 @@
 package com.bulamen7.shop.service.product;
 
-import com.bulamen7.shop.model.product.EntityProduct;
 import com.bulamen7.shop.model.product.ProductDto;
+import com.bulamen7.shop.repository.product.ProductEntity;
 import com.bulamen7.shop.repository.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ProductServiceIT {
     @Test
     void findAll() {
         //given
-        EntityProduct entityProduct = new EntityProduct();
+        ProductEntity entityProduct = new ProductEntity();
         when(productRepository.findAll()).thenReturn(List.of(entityProduct));
         //when
         int size = sut.findAll().size();
@@ -39,7 +39,7 @@ public class ProductServiceIT {
     @Test
     void shouldFindById() {
         //given
-        EntityProduct entityProduct = new EntityProduct("A", BigDecimal.TEN, "desc");
+        ProductEntity entityProduct = new ProductEntity("A", BigDecimal.TEN, "desc");
         when(productRepository.findById(1L)).thenReturn(Optional.of(entityProduct));
         //when
         ProductDto expectedProduct = sut.findById(1L);

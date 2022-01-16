@@ -1,14 +1,21 @@
-package com.bulamen7.shop.model.product;
+package com.bulamen7.shop.repository.product;
+
+import com.bulamen7.shop.repository.order.OrderEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class EntityProduct {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,13 +24,21 @@ public class EntityProduct {
     private String description;
     private LocalDateTime createDateTime = LocalDateTime.now();
 
-    public EntityProduct() {
+    @ManyToMany
+    @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private List<OrderEntity> orderEntities = new ArrayList<>();
+
+    public ProductEntity() {
     }
 
-    public EntityProduct(String name, BigDecimal price, String description) {
+    public ProductEntity(String name, BigDecimal price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
+    }
+
+    public void addOrder(OrderEntity orderEntity) {
+        this.orderEntities.add(orderEntity);
     }
 
     public void setName(String name) {
@@ -57,5 +72,4 @@ public class EntityProduct {
     public LocalDateTime getCreateDateTime() {
         return createDateTime;
     }
-
 }

@@ -1,10 +1,12 @@
 package com.bulamen7.shop.service.product;
 
-import com.bulamen7.shop.model.product.EntityProduct;
 import com.bulamen7.shop.model.product.NewProductForm;
 import com.bulamen7.shop.model.product.ProductDto;
 import com.bulamen7.shop.model.product.UpdateProductForm;
+import com.bulamen7.shop.repository.product.ProductEntity;
 import com.bulamen7.shop.repository.product.ProductRepository;
+import com.bulamen7.shop.service.ModelMapper;
+import com.bulamen7.shop.service.product.exception.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,20 +23,20 @@ public class ProductService {
     }
 
     public void addProduct(NewProductForm productForm) {
-        productRepository.save(new EntityProduct(productForm.getName(), productForm.getPrice(), productForm.getDescription()));
+        productRepository.save(new ProductEntity(productForm.getName(), productForm.getPrice(), productForm.getDescription()));
     }
 
     public List<ProductDto> findAll() {
         return productRepository.findAll().stream()
-                .map(product -> map(product))
+                .map(ModelMapper::map)
                 .collect(Collectors.toList());
     }
 
     public ProductDto findById(Long id) {
         return productRepository
                 .findById(id)
-                .map(product -> map(product))
-                .orElseThrow(() -> new RuntimeException("Product doesnt exists"));
+                .map(ModelMapper::map)
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     public void deleteById(Long id) {
@@ -43,7 +45,7 @@ public class ProductService {
     }
 
     public void patchUpdate(Long id, UpdateProductForm updateProductForm) {
-        EntityProduct entityProduct = productRepository
+        ProductEntity entityProduct = productRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Product cant be update"));
 
@@ -59,16 +61,12 @@ public class ProductService {
     }
 
     public void putUpdate(Long id, UpdateProductForm updateProductForm) {
-        EntityProduct entityProduct = productRepository
+        ProductEntity entityProduct = productRepository
                 .findById(id).
                 orElseThrow(() -> new RuntimeException("Product cant be update"));
         entityProduct.setPrice(updateProductForm.getPrice());
         entityProduct.setName(updateProductForm.getName());
         entityProduct.setDescription(updateProductForm.getDescription());
-    }
-
-    private ProductDto map(EntityProduct product) {
-        return new ProductDto(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getCreateDateTime());
     }
 
 

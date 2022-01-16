@@ -1,13 +1,17 @@
 package com.bulamen7.shop.repository.user;
 
+import com.bulamen7.shop.repository.order.OrderEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,10 +20,13 @@ public class User {
     private String password;
     private String mail;
 
-    public User() {
+    @OneToMany(mappedBy = "user")
+    private List<OrderEntity> orderEntities;
+
+    public UserEntity() {
     }
 
-    public User(String name, String login, String password, String mail) {
+    public UserEntity(String name, String login, String password, String mail) {
         this.name = name;
         this.login = login;
         this.password = password;
@@ -78,7 +85,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        UserEntity user = (UserEntity) o;
         return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(mail, user.mail);
     }
 
