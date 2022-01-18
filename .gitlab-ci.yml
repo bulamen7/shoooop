@@ -7,7 +7,7 @@ deploy-devlop-branch:
   stage: deploy
   only:
     refs:
-      - master
+      - main
   image: ruby:2.6
   script:
     - echo "Heroku Depoloy!"
