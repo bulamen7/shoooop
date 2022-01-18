@@ -21,7 +21,6 @@ public class RegistrationForm {
         this.repeatedPassword = repeatedPassword;
     }
 
-
     public String getName() {
         return name;
     }

@@ -6,11 +6,13 @@ import com.bulamen7.shop.repository.user.UserEntity;
 import com.bulamen7.shop.repository.user.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -29,7 +31,7 @@ public class UserService {
 
     public void changePassword(NewPasswordForm newPasswordForm, String login) {
         Optional<UserEntity> byLogin = userRepository.findByLogin(login);
-        byLogin.ifPresent(u -> u.setPassword(passwordEncoder.encode(newPasswordForm.getNewPassword())));
+        byLogin.ifPresent(u -> u.setPassword(passwordEncoder.encode(newPasswordForm.getPassword())));
     }
 
     public UserEntity findById(Long id) {

@@ -1,6 +1,6 @@
-package com.bulamen7.shop.controller.user;
+package com.bulamen7.shop.controller.authentication;
 
-import com.bulamen7.shop.model.user.RegistrationForm;
+import com.bulamen7.shop.model.authentication.NewPasswordForm;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -9,18 +9,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class RegistrationFormValidator implements Validator {
+public class NewPasswordFormValidator implements Validator {
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return RegistrationForm.class.equals(clazz);
+        return NewPasswordForm.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        RegistrationForm form = (RegistrationForm) target;
+        NewPasswordForm form = (NewPasswordForm) target;
         Matcher matcher = PASSWORD_PATTERN.matcher(form.getPassword());
         if (!matcher.matches()) {
             errors.rejectValue("password", "validator.field.passwordInvalid");
@@ -36,3 +36,4 @@ public class RegistrationFormValidator implements Validator {
         return password.equals(repeatedPassword);
     }
 }
+

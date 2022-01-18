@@ -24,6 +24,11 @@ public class GlobalExceptionHandler {
         return getModelAndView(exception.getMessage());
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    ModelAndView illegalArgumentException(IllegalStateException exception) {
+        return getModelAndView(exception.getMessage());
+    }
+
     private ModelAndView getModelAndView(String exception) {
         ModelAndView modelAndView = new ModelAndView("error/errorPage");
         modelAndView.addObject("message", exception);

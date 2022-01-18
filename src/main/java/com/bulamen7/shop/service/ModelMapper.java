@@ -11,12 +11,20 @@ import java.util.stream.Collectors;
 public class ModelMapper {
     public static OrderDto map(OrderEntity entity) {
         List<ProductEntity> products = entity.getProducts();
-        List<ProductDto> collect = products.stream().map(ModelMapper::map).collect(Collectors.toList());
-        return new OrderDto(entity.getId(), entity.getUser().getId(), collect);
+        List<ProductDto> productsDtos = products.stream().map(ModelMapper::map).collect(Collectors.toList());
+        return new OrderDto(
+                entity.getId(),
+                entity.getUser()
+                        .getId(), productsDtos);
     }
 
     public static ProductDto map(ProductEntity product) {
-        return new ProductDto(product.getId(), product.getName(), product.getPrice(), product.getDescription(), product.getCreateDateTime());
+        return new ProductDto(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getDescription(),
+                product.getCreateDateTime());
     }
 
 }
