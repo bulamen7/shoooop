@@ -1,4 +1,4 @@
-package com.bulamen7.shop.controller.product;
+package com.bulamen7.shop.controller.cart;
 
 import com.bulamen7.shop.component.Cart;
 import com.bulamen7.shop.model.product.ProductDto;
@@ -21,12 +21,18 @@ public class CartController {
 
     @GetMapping
     ModelAndView cartPage() {
-
         ModelAndView modelAndView = new ModelAndView("cart/index");
         List<ProductDto> products = cart.findAllProducts();
         modelAndView.addObject("products", products);
         return modelAndView;
     }
+
+    @GetMapping("/submit")
+    String submitOrder() {
+        cart.submitCart();
+        return "redirect:/cart";
+    }
+
 
     //trick: get method changes system state
     @GetMapping("/addProduct/{id}")

@@ -60,12 +60,6 @@ class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/{id}/delete")
-    String deleteProduct(@PathVariable Long id) {
-        productService.deleteById(id);
-        return "redirect:/products";
-    }
-
     @PostMapping("/add")
     ModelAndView addProduct(@ModelAttribute("newProduct") @Validated NewProductForm newProduct, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -73,6 +67,12 @@ class ProductController {
         }
         productService.addProduct(newProduct);
         return new ModelAndView("redirect:/products");
+    }
+
+    @GetMapping("/{id}/delete")
+    String deleteProduct(@PathVariable Long id) {
+        productService.deleteById(id);
+        return "redirect:/products";
     }
 
     @PostMapping("/{id}/patch")
