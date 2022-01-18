@@ -6,11 +6,13 @@
     </head>
     <body>
         <form th:object="${registerForm}" method="post" th:action="@{/register/add}">
-
+            <b>nazwa</b>
             <input th:field="*{login}">
             <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+            <b>haslo</b>
             <input th:field="*{password}">
             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            <b>powtorz haslo</b>
             <input th:field="*{repeatedPassword}">
             <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></div>
             <button th:type="submit">Utworz konto</button>

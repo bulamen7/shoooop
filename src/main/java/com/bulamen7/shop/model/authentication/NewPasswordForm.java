@@ -9,9 +9,9 @@ public class NewPasswordForm {
     public NewPasswordForm() {
     }
 
-    public NewPasswordForm(String newPassword, String repeatedNewPassword) {
-        this.password = newPassword;
-        this.repeatedPassword = repeatedNewPassword;
+    public NewPasswordForm(String password, String repeatedPassword) {
+        this.password = password;
+        this.repeatedPassword = repeatedPassword;
     }
 
     public String getPassword() {
