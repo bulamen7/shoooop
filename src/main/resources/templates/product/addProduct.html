@@ -7,16 +7,16 @@
     <body>
         <form th:object="${newProduct}" method="post" th:action="@{/products/add}">
             <br>
-            <input th:field="*{name}">
-            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <input th:field="*{name}" th:placeholder="#{product.addProduct.name}">
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:placeholder="nazwa"></div>
             <br>
-            <input th:field="*{price}">
-            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+            <input th:field="*{price}" th:placeholder="#{product.addProduct.price}">
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:placeholder="cena"></div>
             <br>
-            <input th:field="*{description}">
+            <input th:field="*{description}" th:placeholder="#{product.addProduct.description}">
             <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             <br>
-            <button th:type="submit">Dodaj</button>
+            <button th:type="submit">[[#{product.addProduct.button.add}]]</button>
         </form>
     </body>
 </html>
