@@ -16,7 +16,9 @@
             <input th:field="*{description}" th:placeholder="#{product.addProduct.description}">
             <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             <br>
-            <button th:type="submit">[[#{product.addProduct.button.add}]]</button>
+            <a href="/">
+                <button>[[#{product.addProduct.button.add}]]</button>
+            </a>
         </form>
     </body>
 </html>
