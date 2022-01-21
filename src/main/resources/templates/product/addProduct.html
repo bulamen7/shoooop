@@ -8,10 +8,12 @@
         <form th:object="${newProduct}" method="post" th:action="@{/products/add}">
             <br>
             <input th:field="*{name}" th:placeholder="#{product.addProduct.name}">
-            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:placeholder="nazwa"></div>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                 th:placeholder="product.addProduct.name"></div>
             <br>
             <input th:field="*{price}" th:placeholder="#{product.addProduct.price}">
-            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:placeholder="cena"></div>
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                 th:placeholder="product.addProduct.price"></div>
             <br>
             <input th:field="*{description}" th:placeholder="#{product.addProduct.description}">
             <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
