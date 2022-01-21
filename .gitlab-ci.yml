@@ -14,4 +14,4 @@ deploy-devlop-branch:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=shop-store-arek123 --api-key=d4dd94db-5579-45a0-963d-db6ed57dc8c5
+    - dpl --provider=heroku --app=shop-store-arek --api-key=d4dd94db-5579-45a0-963d-db6ed57dc8c5
