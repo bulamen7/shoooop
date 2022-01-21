@@ -17,10 +17,12 @@
                         <!--pobieranie wartosci z message.properties-->
                         <input th:field="*{password}" type="password">
                         <br>
-                        <button type="submit">submit</button>
+                        <button type="submit">[[#{product.button.save}]]</button>
+                        <button type="button" onclick="javascript:history.back()">[[#{product.button.back}]]</button>
                     </form>
                 </div>
             </div>
+
         </div>
 
         <script th:src="@{~/webjars/jquery/3.6.0/jquery.min.js}"></script>

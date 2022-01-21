@@ -5,6 +5,8 @@
         <title>register</title>
         <link rel="stylesheet" type="text/css" th:href="@{~/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
     <body>
+
+
         <form th:object="${registerForm}" method="post" th:action="@{/register/add}">
             <span class="align-middle"></span>
             <br>
@@ -12,16 +14,16 @@
             <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
             <br>
             <input th:field="*{password}" th:placeholder="#{form.login.passwordField}">
-            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             <div id="passwordHelpBlock" class="form-text">
-
+                [[#{validate.message.password}]]
             </div>
             <br>
             <input th:field="*{repeatedPassword}" th:placeholder="#{form.login.passwordRepeatField}">
             <div th:if="${#fields.hasErrors('repeatedPassword')}" th:errors="*{repeatedPassword}"></div>
-
-            <button th:type="submit" class="btn btn-primary">[[#{form.login.saveChanges}]]</button>
-
+            <br>
+            <button th:type="submit">[[#{product.button.createAccount}]]</button>
+            <button type="button" onclick="javascript:history.back()">[[#{product.button.back}]]</button>
         </form>
         <script th:src="@{~/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
     </body>
