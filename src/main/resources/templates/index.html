@@ -24,12 +24,14 @@
                                data-bs-toggle="dropdown" aria-expanded="false">
                                 [[#{form.login.account}]] </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="register">[[#{form.login.register}]]</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login">[[#{navbar.choice.login}]]</a>
-                                </li>
+                                <div sec:authorize="isAnonymous()">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="register">[[#{form.login.register}]]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="login">[[#{navbar.choice.login}]]</a>
+                                    </li>
+                                </div>
                                 <div sec:authorize="isAuthenticated()">
                                     <a class="nav-link"
                                        th:href="changePassword">[[#{form.login.changePassword}]] </a>
