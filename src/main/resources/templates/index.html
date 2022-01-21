@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>homePage</title>
@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" th:href="@{~/webjars/font-awesome/5.15.4/css/all.min.css}"/>
 
     <body>
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">[[#{appName}]]</a>
@@ -29,10 +30,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="login">[[#{navbar.choice.login}]]</a>
                                 </li>
-                                <li class="nav-item">
+                                <div sec:authorize="isAuthenticated()">
                                     <a class="nav-link"
-                                       href="changePassword">[[#{form.login.changePassword}]] </a>
-                                </li>
+                                       th:href="changePassword">[[#{form.login.changePassword}]] </a>
+                                    <a class="nav-link"
+                                       th:href="logout">[[#{navbar.choice.logout}]] </a></div>
                             </ul>
 
                         </li>
@@ -58,6 +60,7 @@
                                         th:if="__${#locale}__=='pl'" class="fas fa-check"></i></a>
                                 </li>
                             </ul>
+
                         </li>
                     </ul>
                 </div>
